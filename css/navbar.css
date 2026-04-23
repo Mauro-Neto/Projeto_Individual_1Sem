@@ -1,0 +1,43 @@
+#but_inicio{
+    background-image: url(../img/inicio-lol.png);
+    background-size: cover;
+    height: 35px;
+    width: 140px;
+    margin-left: 1vw;
+}
+.navbar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+#icon_perfil{
+    background-image: url(../img/icon_vazio.jpg);
+    background-size: cover;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+.perfil{
+    display: flex;
+    flex-direction: row;
+    margin-right: 4vw;
+}
+.info_perfil{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 0.5vw;
+}
+.op_nav_txt{
+    font-size:xx-large;
+    text-decoration: none;
+    color: white;
+}
+.perfil_txt{
+    color: white;
+}
+hr{
+    margin-top: 0vh;
+}
