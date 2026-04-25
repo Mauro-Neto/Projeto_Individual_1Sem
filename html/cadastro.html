@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/selecionado.css">
     <link rel="stylesheet" href="../css/cadastro.css">
     <title>Document</title>
 </head>
@@ -12,13 +13,14 @@
 <body>
     <div class="header">
         <div class="navbar">
-            <a href="">
+            <a href="../index.html">
                 <div id="but_inicio"></div>
             </a>
             <div class="op_nav">
                 <a href="" class="op_nav_txt">Quiz</a>
             </div>
-            <div class="op_nav">
+            <div class="op_nav selecionado">
+                <div id="img_sel"></div>
                 <a href="" class="op_nav_txt">Cadastro</a>
             </div>
             <div class="op_nav">
@@ -37,6 +39,82 @@
         </div>
     </div>
     <hr>
+    <div class="conteudo">
+        <div id="opcoes">
+            <div class="card">
+                <button onclick="cadastrarTime()" class="op_cadastro">Cadastrar Time</button>
+                <button onclick="cadastrarInvocador()" class="op_cadastro">Cadastrar Invocador</button>
+            </div>
+        </div>
+        <div style="display: none;" id="cadastro_time">
+            <span class="titulo">Cadastro Time</span>
+            <div class="card_cadastro">
+                <div class="area_ipt">
+                    <span class="titulo_ipt">Nome</span>
+                    <input type="text" class="input">
+                </div>
+                <div class="area_ipt">
+                    <span class="titulo_ipt">Região</span>
+                    <select id="regiao" class="input">
+                        <option value="" disabled>Selecione a região</option>
+                        <option value="cblol">CBLOL</option>
+                        <option value="lcs">LCS</option>
+                        <option value="lec">LEC</option>
+                        <option value="lck">LCK</option>
+                        <option value="lpl">LPL</option>
+                    </select>
+                </div>
+                <div class="area_ipt">
+                    <span class="titulo_ipt">Titulos Nacionais</span>
+                    <input type="number" class="input">
+                </div>
+                <div class="area_ipt">
+                    <span class="titulo_ipt">Titulos Internacionais</span>
+                    <input type="number" class="input">
+                </div>
+                <div class="but_cadastrar" onclick=""></div>
+            </div>
+        </div>
+        <div id="cadastro_invocador" style="display: none;">
+            <span class="titulo">Cadastro Invocador</span>
+            <div class="card_cadastro">
+                <div class="area_ipt">
+                    <span class="titulo_ipt">Nick</span>
+                    <input type="text" class="input">
+                </div>
+                <div class="area_ipt">
+                    <span class="titulo_ipt">Time Favorito</span>
+                    <select id="regiao" class="input">
+                        <option value="" disabled>Selecione o time</option>
+                        <option value="">RED</option>
+                        <option value="">LOUD</option>
+                        <option value="">PAIN</option>
+                        <option value="">T1</option>
+                        <option value="">GEN.G</option>
+                    </select>
+                </div>
+                <div class="area_ipt">
+                    <span class="titulo_ipt">Email</span>
+                    <input type="text" class="input">
+                </div>
+                <div class="area_ipt">
+                    <span class="titulo_ipt">Senha</span>
+                    <input type="password" class="input">
+                </div>
+                <div class="but_cadastrar" onclick=""></div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
+<script>
+    function cadastrarTime() {
+        opcoes.style.display = 'none';
+        cadastro_time.style.display = 'flex';
+    }
+    function cadastrarInvocador() {
+        opcoes.style.display = 'none';
+        cadastro_invocador.style.display = 'flex';
+    }
+</script>

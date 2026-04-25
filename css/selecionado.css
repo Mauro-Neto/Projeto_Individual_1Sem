@@ -1,0 +1,12 @@
+.selecionado{
+    background-image: linear-gradient(to bottom,  transparent,#ab8115);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#img_sel{
+    background-image: url(../img/pointer.png);
+    background-size: cover;
+    height: 10px;
+    width: 16px;
+}
