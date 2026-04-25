@@ -25,7 +25,7 @@
                 <a href="" class="op_nav_txt">Login</a>
             </div>
             <div class="op_nav">
-                <a href="" class="op_nav_txt">Dasboard</a>
+                <a href="" class="op_nav_txt">Dashboard</a>
             </div>
             <div class="perfil">
                 <div id="icon_perfil"></div>
@@ -55,25 +55,92 @@
     <div class="ligas">
         <span class="titulo">Principais Ligas</span>
         <div class="op_liga">
-            <div class="liga">
+            <div class="liga" onclick="cblolMostrar()">
                 <div id="cblol"></div>
+                <span class="cont_liga" id="txt_cblol"></span>
             </div>
-            <div class="liga">
+            <div class="liga" onclick="lcsMostrar()">
                 <div id="lcs"></div>
+                <span class="cont_liga" id="txt_lcs"></span>
             </div>
-            <div class="liga">
+            <div class="liga" onclick="lecMostrar()">
                 <div id="lec"></div>
+                <span class="cont_liga" id="txt_lec"></span>
             </div>
         </div>
         <div class="op_liga">
-            <div class="liga">
+            <div class="liga" onclick="lckMostrar()">
                 <div id="lck"></div>
+                <span class="cont_liga" id="txt_lck"></span>
             </div>
-            <div class="liga">
+            <div class="liga" onclick="lplMostrar()">
                 <div id="lpl"></div>
+                <span class="cont_liga" id="txt_lpl"></span>
             </div>
         </div>
     </div>
 </body>
+<script>
+    let visi_cblol = 0;
+    let visi_lcs = 0;
+    let visi_lec = 0;
+    let visi_lck = 0;
+    let visi_lpl = 0;
+    function cblolMostrar() {
+        if (visi_cblol == 0) {
+            cblol.style.display = 'none';
+            txt_cblol.innerHTML = `O Campeonato Brasileiro de League of Legends é a principal liga do Brasil, com duas etapas anuais que reúnem as melhores equipes do país em fase regular e playoffs. Apesar da força regional, ainda busca seu primeiro grande título internacional.`
+            visi_cblol = 1;
+        } else {
+            cblol.style.display = 'flex';
+            txt_cblol.innerHTML = ``
+            visi_cblol = 0;
+        }
+    }
+    function lcsMostrar() {
+        if (visi_lcs == 0) {
+            lcs.style.display = 'none';
+            txt_lcs.innerHTML = `A League Championship Series é a principal liga da América do Norte, conhecida por sua estrutura consolidada e equipes tradicionais. Embora já tenha alcançado bons resultados, como finais de Mid-Season Invitational, a região ainda não conquistou um título mundial.`
+            visi_lcs = 1;
+        } else {
+            lcs.style.display = 'flex';
+            txt_lcs.innerHTML = ``;
+            visi_lcs = 0;
+        }
+    }
+    function lecMostrar() {
+        if (visi_lec == 0) {
+            lec.style.display = 'none';
+            txt_lec.innerHTML = `A League of Legends European Championship representa a Europa e é marcada por um alto nível competitivo e constante presença internacional. A região já conquistou títulos importantes, incluindo o Mid-Season Invitational de 2019.`
+            visi_lec = 1;
+        } else {
+            lec.style.display = 'flex';
+            txt_lec.innerHTML = ``;
+            visi_lec = 0;
+        }
+    }
+    function lckMostrar() {
+        if (visi_lck == 0) {
+            lck.style.display = 'none';
+            txt_lck.innerHTML = `A League of Legends Champions Korea é uma das ligas mais dominantes da história, conhecida por sua disciplina e alto nível técnico. A Coreia do Sul acumula diversos títulos mundiais, consolidando-se como uma das maiores potências do cenário.`
+            visi_lck = 1;
+        } else {
+            lck.style.display = 'flex';
+            txt_lck.innerHTML = ``;
+            visi_lck = 0;
+        }
+    }
+    function lplMostrar() {
+        if (visi_lpl == 0) {
+            lpl.style.display = 'none';
+            txt_lpl.innerHTML = `A League of Legends Pro League é a principal liga chinesa e uma das mais competitivas do mundo, destacando-se pelo estilo agressivo de jogo. A região já conquistou múltiplos títulos internacionais, incluindo o World Championship e o Mid-Season Invitational.`
+            visi_lpl = 1;
+        } else {
+            lpl.style.display = 'flex';
+            txt_lpl.innerHTML = ``;
+            visi_lpl = 0;
+        }
+    }
+</script>
 
 </html>

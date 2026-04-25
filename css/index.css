@@ -1,7 +1,4 @@
-body{
-    margin: 0;
-    background-color: #1c1916;
-}
+
 .sobre{
     margin-top: -1vh;
     background-image: url(../img/banner3.png);
@@ -17,6 +14,7 @@ body{
     color: white;
     font-size: xx-large;
     width: 40vw;
+    font-weight: 500;
 }
 .competitivo{
     margin-top: -1vh;
@@ -31,6 +29,7 @@ body{
 .titulo{
     color: white;
     font-size: 5vw;
+    font-weight: 700;
 }
 .conteudo_competitivo{
     width: 50vw;
@@ -93,4 +92,12 @@ body{
     background-size: cover;
     height: 160px;
     width: 270px;
+}
+.cont_liga{
+    color: #24737d;
+    text-align: center;
+    font-size:larger;
+    font-weight: bolder;
+    font-weight: 400;
+    margin: 10px;
 }
