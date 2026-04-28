@@ -1,0 +1,110 @@
+@font-face {
+  font-family: 'Beaufort';
+  src: url('../font/BeaufortforLOL-Regular.ttf') format('truetype');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Beaufort';
+  src: url('../font/BeaufortforLOL-Bold.ttf') format('truetype');
+  font-weight: 700;
+}
+@font-face {
+  font-family: 'Beaufort';
+  src: url('../font/BeaufortforLOL-Medium.ttf') format('truetype');
+  font-weight: 500;
+}
+body{
+    margin: 0;
+}
+*{
+    font-family: Beaufort,serif;
+}
+#bg-video{
+    position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -1;
+}
+.painel{
+    height: 100vh;
+    width: 30vw;
+    background-color: #1c1916;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+#but_inicio:hover{
+    opacity: 70%;
+}
+#but_inicio{
+    background-image: url(../img/inicio-lol.png);
+    background-size: cover;
+    height: 35px;
+    width: 140px;
+    margin-top: 2vh;
+    margin-right: 19vw;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+}
+#logo_lol{
+    background-image: url(../img/logo-lol.png);
+    background-size: cover;
+    height: 15vh;
+    width: 20vw;
+}
+#area_input{
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+}
+#but_login{
+    background-color: #ab8115;
+    height: 60px;
+    width: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    cursor: pointer;
+}
+#img_login{
+    background-image: url(../img/seta.png);
+    background-size: cover;
+    height: 20px;
+    width: 20px;
+}
+#cadastro{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 4vh;
+}
+.input{
+    background-color: #ab8115;
+    color: white;
+    font-weight: 500;
+    font-size: larger;
+    text-align: center;
+    border-radius: 10px;
+    height: 40px;
+    border-style: none;
+    width: 250px;
+}
+.input::placeholder{
+    color: white;
+}
+span{
+    color: white;
+}
+a{
+    text-decoration: none;
+    color: white    ;
+}
