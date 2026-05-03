@@ -41,6 +41,7 @@ body{
 }
 #but_inicio:hover{
     opacity: 70%;
+    transform: scale(1.05);
 }
 #but_inicio{
     background-image: url(../img/inicio-lol.png);
@@ -74,6 +75,11 @@ body{
     align-items: center;
     border-radius: 12px;
     cursor: pointer;
+    transition: transform 1s ease;
+}
+#but_login:hover{
+    transform: scale(1.05);
+    box-shadow: 0px 0px 0px 2px white;
 }
 #img_login{
     background-image: url(../img/seta.png);
@@ -88,23 +94,32 @@ body{
     margin-bottom: 4vh;
 }
 .input{
-    background-color: #ab8115;
+    background-color: #ab8115b5;
     color: white;
     font-weight: 500;
     font-size: larger;
     text-align: center;
     border-radius: 10px;
     height: 40px;
-    border-style: none;
+    border-style: solid;
+    border-width: 1px;
+    border-color: white ;
     width: 250px;
 }
 .input::placeholder{
     color: white;
+}
+.input:focus{
+    transform: scale(1.05);
 }
 span{
     color: white;
 }
 a{
     text-decoration: none;
-    color: white    ;
+    color: white;
+}
+#but_cadastrar:hover{
+    transform: scale(1.05);
+    font-weight: bold;
 }

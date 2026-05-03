@@ -9,7 +9,7 @@ body{
     justify-content: center;
 }
 .card{
-    background-color:#24737d;
+    background-color: transparent;
     height: 40vh;
     width: 40vw;
     display: flex;
@@ -63,6 +63,11 @@ body{
     background-size: cover;
     height: 40px;
     width: 220px;
+    cursor: pointer;
+}
+.but_cadastrar:hover{
+    transform: scale(1.05);
+    opacity: 70%;
 }
 .titulo_ipt{
     font-weight: 700;
@@ -70,15 +75,17 @@ body{
     text-align: center;
 }
 .input{
-    background-color: #ab8115;
+    background-color: #ab8115b5;
     color: white;
     font-weight: 500;
     font-size: larger;
     text-align: center;
     border-radius: 10px;
     height: 30px;
-    border-style: none;
     width: 250px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: white ;
 }
 .titulo{
     color: white;

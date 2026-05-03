@@ -29,6 +29,7 @@ body{
 }
 #but_inicio:hover{
     opacity: 70%;
+    transform: scale(1.05);
 }
 .navbar {
     display: flex;
