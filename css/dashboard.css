@@ -1,0 +1,66 @@
+body{
+    background-color: #1c1916;
+}
+.KPIs{
+    height: 15vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 1vw;
+    margin-right: 1vw;
+}
+.kpi{
+    height: 10vh;
+    width: 20vw;
+    background-color: #ab8115b5;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.txt_kpi{
+    color: white;
+    font-weight: 700;
+    font-size: x-large;
+    text-align: center;
+}
+.chart-container{
+    height: 45vh;
+    width: 45vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10vh;
+}
+.titulo_grafico{
+    color: #ab8115;
+    font-weight: 500;
+    font-size: x-large;
+}
+.graficos{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 1vw;
+    margin-right: 1vw;
+    flex-wrap: wrap;
+}
+.titulo{
+    color: white;
+    font-weight: 700;
+    font-size: xx-large;
+}
+.tabelas{
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 5vh;
+}
+.tabela{
+    display: flex;
+    justify-content: center;
+    height: 18vh;
+    width: 80vw;
+    background-color: #24737d;
+    border-radius: 15px;
+}
