@@ -33,11 +33,13 @@ body{
     font-size: x-large;
 }
 .op{
-    width: 15vw;
+    width: 25vw;
     background-color: #ab8115;
     border: 3px solid #ab8115;
     text-align: center;
     border-radius: 15px;
+    font-weight: 500;
+    font-size: larger;
     cursor: pointer;
 }
 .op:hover{

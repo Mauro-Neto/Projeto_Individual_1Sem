@@ -45,10 +45,10 @@
             <span id="titulo_pergunta">1. Blah</span>
             <span id="pergunta">Qual que é não sei</span>
             <div class="opcoes">
-                <div class="op" id="op1" onclick="selecionar1()">hhd</div>
-                <div class="op" id="op2" onclick="selecionar2()">sdsk</div>
-                <div class="op" id="op3" onclick="selecionar3()">sdkj</div>
-                <div class="op" id="op4" onclick="selecionar4()">sdnh</div>
+                <button class="op" id="op1" onclick="selecionar1()">hhd</button>
+                <button class="op" id="op2" onclick="selecionar2()">sdsk</button>
+                <button class="op" id="op3" onclick="selecionar3()">sdkj</button>
+                <button class="op" id="op4" onclick="selecionar4()">sdnh</button>
             </div>
         </div>
         <div id="confirmar_but" onclick="responder()"></div>
@@ -62,11 +62,12 @@
     let selecionado3 = false;
     let selecionado4 = false;
     let indice = 1;
+    let pontuacao = 0;
     function trocar() {
-        op1.style.border = '3px solid #ab8115'
-        op2.style.border = '3px solid #ab8115'
-        op3.style.border = '3px solid #ab8115'
-        op4.style.border = '3px solid #ab8115'
+        op1.style.outline = 'none';
+        op2.style.outline = 'none';
+        op3.style.outline = 'none';
+        op4.style.outline = 'none';
 
         if (indice == 2) {
             titulo_pergunta.innerHTML = `Pergunta ${indice}`
@@ -86,77 +87,115 @@
     }
 
     function responder() {
-        if(selecionado1 == false && selecionado2 == false && selecionado3 == false && selecionado4 == false){
+        if (selecionado1 == false && selecionado2 == false && selecionado3 == false && selecionado4 == false) {
             alert(`Selecione uma resposta`)
-        }else{
-        op1.style.opacity = '100%'
-        op2.style.opacity = '100%'
-        op3.style.opacity = '100%'
-        op4.style.opacity = '100%'
-        selecionado1 = false;
-        selecionado2 = false;
-        selecionado3 = false;
-        selecionado4 = false;
-        if(indice == 1){
-            op3.style.border = '3px solid green'
+        } else {
+            opc1(true);
+            opc2(true);
+            opc3(true);
+            opc4(true);
+            if (indice == 1) {
+                op3.style.outline = '5px solid green'
+                if(selecionado3){
+                    pontuacao++;
+                    alert(pontuacao);
+                }
+            }
+            selecionado1 = false;
+            selecionado2 = false;
+            selecionado3 = false;
+            selecionado4 = false;
+            indice++;
+            setInterval(trocar, 2000);
         }
-        indice++;
-        setInterval(trocar,2000);
-    }
     }
     function selecionar1() {
         if (selecionado1) {
-            op2.style.opacity = '100%'
-            op3.style.opacity = '100%'
-            op4.style.opacity = '100%'
+            opc2(true);
+            opc3(true);
+            opc4(true);
             selecionado1 = false;
         } else {
-            op2.style.opacity = '30%'
-            op3.style.opacity = '30%'
-            op4.style.opacity = '30%'
+            opc2(false);
+            opc3(false);
+            opc4(false);
             selecionado1 = true;
         }
 
     }
     function selecionar2() {
         if (selecionado2) {
-            op1.style.opacity = '100%'
-            op3.style.opacity = '100%'
-            op4.style.opacity = '100%'
+            opc1(true);
+            opc3(true);
+            opc4(true);
             selecionado2 = false;
         } else {
-            op1.style.opacity = '30%'
-            op3.style.opacity = '30%'
-            op4.style.opacity = '30%'
+            opc1(false);
+            opc3(false);
+            opc4(false);
             selecionado2 = true;
         }
-
     }
     function selecionar3() {
         if (selecionado3) {
-            op2.style.opacity = '100%'
-            op1.style.opacity = '100%'
-            op4.style.opacity = '100%'
+            opc2(true);
+            opc1(true);
+            opc4(true);
             selecionado3 = false;
         } else {
-            op2.style.opacity = '30%'
-            op1.style.opacity = '30%'
-            op4.style.opacity = '30%'
+            opc2(false);
+            opc1(false);
+            opc4(false);
             selecionado3 = true;
         }
-
     }
     function selecionar4() {
         if (selecionado4) {
-            op2.style.opacity = '100%'
-            op3.style.opacity = '100%'
-            op1.style.opacity = '100%'
+            opc2(true);
+            opc3(true);
+            opc1(true);
             selecionado4 = false;
         } else {
-            op2.style.opacity = '30%'
-            op3.style.opacity = '30%'
-            op1.style.opacity = '30%'
+            opc2(false);
+            opc3(false);
+            opc1(false);
             selecionado4 = true;
+        }
+    }
+    function opc1(estado){
+        if(estado){
+            op1.style.opacity = '100%';
+            op1.disabled = false;
+        }else{
+            op1.style.opacity = '30%';
+            op1.disabled = true;
+        }
+    }
+     function opc2(estado){
+        if(estado){
+            op2.style.opacity = '100%';
+            op2.disabled = false;
+        }else{
+            op2.style.opacity = '30%';
+            op2.disabled = true;
+        }
+    }
+     function opc3(estado){
+        if(estado){
+            op3.style.opacity = '100%';
+            op3.disabled = false;
+        }else{
+            op3.style.opacity = '30%';
+            op3.disabled = true;
+        }
+    }
+     function opc4(estado){
+        if(estado){
+            op4.style.opacity = '100%';
+            op4.disabled = false;
+        }else{
+            op4.style.opacity = '30%';
+            op4.disabled = true;
         }
     }
 </script>
