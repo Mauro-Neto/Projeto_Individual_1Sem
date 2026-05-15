@@ -1,0 +1,62 @@
+body{
+    background-color: #1c1916;
+}
+#titulo{
+    color:#ab8115;
+    font-weight: 700;
+    font-size: xx-large;
+    border-bottom: 2px solid white;
+    width: 100%;
+    text-align: center;
+}
+.conteudo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 80vh;
+    justify-content: space-between;
+}
+.cont_pergunta{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    justify-content: space-evenly;
+    height: 30vh;
+}
+#titulo_pergunta{
+ font-weight: 700;   
+ font-size: xx-large;
+}
+#pergunta{
+    font-weight: 500;
+    font-size: x-large;
+}
+.op{
+    width: 25vw;
+    background-color: #ab8115;
+    border: 3px solid #ab8115;
+    text-align: center;
+    border-radius: 15px;
+    font-weight: 500;
+    font-size: larger;
+    cursor: pointer;
+}
+.op:hover{
+    transform: scale(1.05);
+}
+.opcoes{
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+}
+#confirmar_but{
+    background-image: url(../assets/img/confirmar_but.png);
+    background-size: cover;
+    height: 50px;
+    width: 192px;
+    cursor: pointer;
+}
+#confirmar_but:hover{
+    transform: scale(1.05);
+}

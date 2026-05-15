@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/selecionado.css">
+    <link rel="stylesheet" href="css/cadastro.css">
+    <title>Document</title>
+</head>
+
+<body onload="listar()">
+    <div class="header">
+        <div class="navbar">
+            <a href="index.html">
+                <div id="but_inicio"></div>
+            </a>
+            <div class="op_nav">
+                <a href="quiz.html" class="op_nav_txt">Quiz</a>
+            </div>
+            <div class="op_nav selecionado">
+                <div id="img_sel"></div>
+                <a href="cadastro.html" class="op_nav_txt">Cadastro</a>
+            </div>
+            <div class="op_nav">
+                <a href="login.html" class="op_nav_txt">Login</a>
+            </div>
+            <div class="op_nav">
+                <a href="dashboard.html" class="op_nav_txt">Dashboard</a>
+            </div>
+            <div class="perfil">
+                <div id="icon_perfil"></div>
+                <div class="info_perfil">
+                    <span class="perfil_txt">Invocador</span>
+                    <span class="perfil_txt">Rank:</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="conteudo">
+
+        <div id="opcoes">
+            <div class="card">
+                <button onclick="cadastrarTime()" class="op_cadastro">Cadastrar Time</button>
+                <button onclick="cadastrarInvocador()" class="op_cadastro">Cadastrar Invocador</button>
+            </div>
+        </div>
+
+        <div style="display: none;" id="cadastro_time">
+            <span class="titulo">Cadastro Time</span>
+            <div class="card_cadastro">
+                <div class="area_ipt">
+                    <span class="titulo_ipt">Nome</span>
+                    <input type="text" class="input" id="nome_input">
+                </div>
+                <div class="area_ipt">
+                    <span class="titulo_ipt">Região</span>
+                    <select id="regiao_input" class="input">
+                        <option value="" disabled>Selecione a região</option>
+                        <option value="cblol">CBLOL</option>
+                        <option value="lcs">LCS</option>
+                        <option value="lec">LEC</option>
+                        <option value="lck">LCK</option>
+                        <option value="lpl">LPL</option>
+                    </select>
+                </div>
+                <div class="area_ipt">
+                    <span class="titulo_ipt">Titulos Nacionais</span>
+                    <input type="number" class="input" id="titulosNacionais_input">
+                </div>
+                <div class="area_ipt">
+                    <span class="titulo_ipt">Titulos Internacionais</span>
+                    <input type="number" class="input" id="titulosInternacionais_input">
+                </div>
+                <div class="but_cadastrar" onclick="cadastrarT()"></div>
+            </div>
+        </div>
+
+        <div id="cadastro_invocador" style="display: none;">
+            <span class="titulo">Cadastro Invocador</span>
+            <div class="card_cadastro">
+                <div class="area_ipt">
+                    <span class="titulo_ipt">Nick</span>
+                    <input type="text" class="input" id="nick_input">
+                </div>
+                <div class="area_ipt">
+                    <span class="titulo_ipt">Time Favorito</span>
+                    <input type="text" id="time_input" class="input">
+                </div>
+                <div class="area_ipt">
+                    <span class="titulo_ipt">Email</span>
+                    <input type="text" class="input" id="email_input">
+                </div>
+                <div class="area_ipt">
+                    <span class="titulo_ipt">Senha</span>
+                    <input type="password" class="input" id="senha_input">
+                </div>
+                <div class="but_cadastrar" onclick="cadastrarI()"></div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
+<script>
+  let listaTimesCadastrados = [];
+
+    function cadastrarTime() {
+        opcoes.style.display = 'none';
+        cadastro_time.style.display = 'flex';
+    }
+
+    function cadastrarInvocador() {
+        opcoes.style.display = 'none';
+        cadastro_invocador.style.display = 'flex';
+    }
+
+     function cadastrarI() {
+    // aguardar();
+
+    //Recupere o valor da nova input pelo nome do id
+    // Agora vá para o método fetch logo abaixo
+    var nickVar = nick_input.value;
+    var emailVar = email_input.value;
+    var senhaVar = senha_input.value;
+    var timeVar = time_input.value;
+    var idTimeVincular
+
+    // Verificando se há algum campo em branco
+    if (
+      nickVar == "" ||
+      emailVar == "" ||
+      senhaVar == ""  ||
+      timeVar == ""
+    ) {
+      return false;
+    }
+    // Verificando se o código de ativação é de alguma empresa cadastrada
+    for (let i = 0; i < listaTimesCadastrados.length; i++) {
+      if (listaTimesCadastrados[i].nome == timeVar) {
+        idTimeVincular = listaTimesCadastrados[i].idTime
+        console.log("Código de ativação válido.");
+        break;
+      } else {
+        alert('Código Inválido')
+      }
+    }
+
+    // Enviando o valor da nova input
+    fetch("/usuarios/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nickServer: nickVar,
+        emailServer: emailVar,
+        senhaServer: senhaVar,
+        idTimeVincularServer: idTimeVincular
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          setTimeout(() => {
+            window.location = "login.html";
+          }, "2000");
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+
+    return false;
+  }
+  // Listando empresas cadastradas 
+  function listar() {
+    fetch("/time/listar", {
+      method: "GET",
+    })
+      .then(function (resposta) {
+        resposta.json().then((times) => {
+          times.forEach((time) => {
+            listaTimesCadastrados.push(time);
+
+            console.log("listaTimesCadastrados")
+            console.log(listaTimesCadastrados[0].nome)
+          });
+        });
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  }
+  function cadastrarT() {
+    // aguardar();
+
+    //Recupere o valor da nova input pelo nome do id
+    // Agora vá para o método fetch logo abaixo
+    var nomeVar = nome_input.value;
+    var regiaoVar = regiao_input.value;
+    var titulosNacionaisVar = titulosNacionais_input.value;
+    var titulosInternacionaisVar = titulosInternacionais_input.value;
+
+    // Verificando se há algum campo em branco
+    if (
+      nomeVar == "" ||
+      regiaoVar == "" ||
+      titulosNacionaisVar == "" ||
+      titulosInternacionaisVar == ""
+    ) {
+      return false;
+    }
+    // // Verificando se o código de ativação é de alguma empresa cadastrada
+    // for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
+    //   if (listaEmpresasCadastradas[i].codigo_ativacao == codigoVar) {
+    //     idEmpresaVincular = listaEmpresasCadastradas[i].id
+    //     console.log("Código de ativação válido.");
+    //     break;
+    //   } else {
+    //     alert('Código Inválido')
+    //   }
+    // }
+
+    // Enviando o valor da nova input
+    fetch("/time/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nomeServer: nomeVar,
+        regiaoServer: regiaoVar,
+        titulosNacionaisServer: titulosNacionaisVar,
+        titulosInternacionaisServer: titulosInternacionaisVar
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          setTimeout(() => {
+            window.location = "cadastro.html";
+          }, "2000");
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+
+    return false;
+  }
+</script>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/selecionado.css">
+    <link rel="stylesheet" href="css/quiz.css">
+    <title>Document</title>
+</head>
+
+<body onload="trocar()">
+    <div class="header">
+        <div class="navbar">
+            <a href="../index.html">
+                <div id="but_inicio"></div>
+            </a>
+            <div class="op_nav selecionado">
+                <div id="img_sel"></div>
+                <a href="quiz.html" class="op_nav_txt">Quiz</a>
+            </div>
+            <div class="op_nav">
+                <a href="cadastro.html" class="op_nav_txt">Cadastro</a>
+            </div>
+            <div class="op_nav">
+                <a href="login.html" class="op_nav_txt">Login</a>
+            </div>
+            <div class="op_nav">
+                <a href="dashboard.html" class="op_nav_txt">Dashboard</a>
+            </div>
+            <div class="perfil">
+                <div id="icon_perfil"></div>
+                <div class="info_perfil">
+                    <span class="perfil_txt">Invocador</span>
+                    <span class="perfil_txt">Rank:</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="conteudo">
+        <span id="titulo">Teste seu conhecimento</span>
+        <div class="cont_pergunta">
+            <span id="titulo_pergunta">1. Blah</span>
+            <span id="pergunta">Qual que é não sei</span>
+            <div class="opcoes">
+                <button class="op" id="op1" onclick="selecionar1()">hhd</button>
+                <button class="op" id="op2" onclick="selecionar2()">sdsk</button>
+                <button class="op" id="op3" onclick="selecionar3()">sdkj</button>
+                <button class="op" id="op4" onclick="selecionar4()">sdnh</button>
+            </div>
+        </div>
+        <div id="confirmar_but" onclick="responder()"></div>
+    </div>
+</body>
+
+</html>
+<script>
+    let selecionado1 = false;
+    let selecionado2 = false;
+    let selecionado3 = false;
+    let selecionado4 = false;
+    let indice = 1;
+    let pontuacao = 0;
+    function trocar() {
+        op1.style.outline = 'none';
+        op2.style.outline = 'none';
+        op3.style.outline = 'none';
+        op4.style.outline = 'none';
+
+        if (indice == 1) {
+            titulo_pergunta.innerHTML = `Pergunta ${indice}`
+            pergunta.innerHTML = `Qual destas equipes pertence ao cenário brasileiro de League of Legends?`
+            op1.innerHTML = `Gen.G`;
+            op2.innerHTML = `JD Gaming`;
+            op3.innerHTML = `LOUD`;
+            op4.innerHTML = `T1`;
+        } else if (indice == 2) {
+            titulo_pergunta.innerHTML = `Pergunta ${indice}`
+            pergunta.innerHTML = `Qual destes jogadores é brasileiro?`
+            op1.innerHTML = `Faker`;
+            op2.innerHTML = `Caps`;
+            op3.innerHTML = `brTT`;
+            op4.innerHTML = `Chovy`;
+        }else if (indice == 3) {
+            titulo_pergunta.innerHTML = `Pergunta ${indice}`
+            pergunta.innerHTML = `Qual jogador é conhecido mundialmente como o maior nome da história competitiva de LoL?`
+            op1.innerHTML = `Doublelift`;
+            op2.innerHTML = `Faker`;
+            op3.innerHTML = `brTT`;
+            op4.innerHTML = `Caps`;
+        }else if (indice == 4) {
+            titulo_pergunta.innerHTML = `Pergunta ${indice}`
+            pergunta.innerHTML = `Qual campeonato internacional acontece no meio da temporada competitiva de LoL?`
+            op1.innerHTML = `Worlds`;
+            op2.innerHTML = `MSI`;
+            op3.innerHTML = `Rift Challenge`;
+            op4.innerHTML = `Rogue Tournment`;
+        }else if (indice == 5) {
+            titulo_pergunta.innerHTML = `Pergunta ${indice}`
+            pergunta.innerHTML = `Qual foi a equipe que conquistou 4 títulos seguidos de CBLOL?`
+            op1.innerHTML = `paiN Gaming`;
+            op2.innerHTML = `KaBuM! Esports`;
+            op3.innerHTML = `INTZ`;
+            op4.innerHTML = `LOUD`;
+        }else if (indice == 6) {
+            titulo_pergunta.innerHTML = `Pergunta ${indice}`
+            pergunta.innerHTML = `Qual equipe venceu o Worlds de 2022`
+            op1.innerHTML = `DRX`;
+            op2.innerHTML = `T1`;
+            op3.innerHTML = `EDward Gaming`;
+            op4.innerHTML = `Gen.G`;
+        }else if (indice == 7) {
+            titulo_pergunta.innerHTML = `Pergunta ${indice}`
+            pergunta.innerHTML = `Qual equipe venceu o primeiro Worlds da história do LoL em 2011?`
+            op1.innerHTML = `Fnatic`;
+            op2.innerHTML = `SK Telecom T1`;
+            op3.innerHTML = `Taipei Assassins`;
+            op4.innerHTML = `Samsung White`;
+        }else if (indice == 8) {
+            titulo_pergunta.innerHTML = `Pergunta ${indice}`
+            pergunta.innerHTML = `Em qual ano a Invictus Gaming conquistou o primeiro título mundial da China?`
+            op1.innerHTML = `2016`;
+            op2.innerHTML = `2017`;
+            op3.innerHTML = `2018`;
+            op4.innerHTML = `2019`;
+        }else if (indice == 9) {
+            titulo_pergunta.innerHTML = `Pergunta ${indice}`
+            pergunta.innerHTML = `Qual jogador da Samsung White ficou conhecido por revolucionar a visão de jogo e o controle de mapa como suporte no Worlds 2014?`
+            op1.innerHTML = `Dandy`;
+            op2.innerHTML = `Mata`;
+            op3.innerHTML = `Pawn`;
+            op4.innerHTML = `Imp`;
+        }
+    }
+
+    function responder() {
+        if (selecionado1 == false && selecionado2 == false && selecionado3 == false && selecionado4 == false) {
+            alert(`Selecione uma resposta`)
+        } else {
+            opc1(true);
+            opc2(true);
+            opc3(true);
+            opc4(true);
+            if (indice == 1) {
+                op3.style.outline = '5px solid green'
+                if(selecionado3){
+                    pontuacao++;
+                    alert(pontuacao);
+                }
+            }else if(indice == 2){
+                op3.style.outline = '5px solid green'
+                if(selecionado3){
+                    pontuacao++;
+                    alert(pontuacao);
+                }
+            }else if(indice == 3){
+                op2.style.outline = '5px solid green'
+                if(selecionado2){
+                    pontuacao++;
+                    alert(pontuacao);
+                }
+            }else if(indice == 4){
+                op2.style.outline = '5px solid green'
+                if(selecionado2){
+                    pontuacao++;
+                    alert(pontuacao);
+                }
+            }else if(indice == 5){
+                op4.style.outline = '5px solid green'
+                if(selecionado4){
+                    pontuacao++;
+                    alert(pontuacao);
+                }
+            }else if(indice == 6){
+                op1.style.outline = '5px solid green'
+                if(selecionado1){
+                    pontuacao++;
+                    alert(pontuacao);
+                }
+            }else if(indice == 7){
+                op1.style.outline = '5px solid green'
+                if(selecionado1){
+                    pontuacao++;
+                    alert(pontuacao);
+                }
+            }else if(indice == 8){
+                op3.style.outline = '5px solid green'
+                if(selecionado3){
+                    pontuacao++;
+                    alert(pontuacao);
+                }
+            }else if(indice == 9){
+                op2.style.outline = '5px solid green'
+                if(selecionado2){
+                    pontuacao++;
+                    alert(pontuacao);
+                }
+            }
+            selecionado1 = false;
+            selecionado2 = false;
+            selecionado3 = false;
+            selecionado4 = false;
+            indice++;
+            setTimeout(trocar, 2000);
+        }
+    }
+    function selecionar1() {
+        if (selecionado1) {
+            opc2(true);
+            opc3(true);
+            opc4(true);
+            selecionado1 = false;
+        } else {
+            opc2(false);
+            opc3(false);
+            opc4(false);
+            selecionado1 = true;
+        }
+
+    }
+    function selecionar2() {
+        if (selecionado2) {
+            opc1(true);
+            opc3(true);
+            opc4(true);
+            selecionado2 = false;
+        } else {
+            opc1(false);
+            opc3(false);
+            opc4(false);
+            selecionado2 = true;
+        }
+    }
+    function selecionar3() {
+        if (selecionado3) {
+            opc2(true);
+            opc1(true);
+            opc4(true);
+            selecionado3 = false;
+        } else {
+            opc2(false);
+            opc1(false);
+            opc4(false);
+            selecionado3 = true;
+        }
+    }
+    function selecionar4() {
+        if (selecionado4) {
+            opc2(true);
+            opc3(true);
+            opc1(true);
+            selecionado4 = false;
+        } else {
+            opc2(false);
+            opc3(false);
+            opc1(false);
+            selecionado4 = true;
+        }
+    }
+    function opc1(estado){
+        if(estado){
+            op1.style.opacity = '100%';
+            op1.disabled = false;
+        }else{
+            op1.style.opacity = '30%';
+            op1.disabled = true;
+        }
+    }
+     function opc2(estado){
+        if(estado){
+            op2.style.opacity = '100%';
+            op2.disabled = false;
+        }else{
+            op2.style.opacity = '30%';
+            op2.disabled = true;
+        }
+    }
+     function opc3(estado){
+        if(estado){
+            op3.style.opacity = '100%';
+            op3.disabled = false;
+        }else{
+            op3.style.opacity = '30%';
+            op3.disabled = true;
+        }
+    }
+     function opc4(estado){
+        if(estado){
+            op4.style.opacity = '100%';
+            op4.disabled = false;
+        }else{
+            op4.style.opacity = '30%';
+            op4.disabled = true;
+        }
+    }
+</script>

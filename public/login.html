@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/login.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <video autoplay muted loop playsinline id="bg-video">
+        <source src="../assets/img/animated-poppy.webm" type="video/webm">
+    </video>
+    <div class="painel">
+        <a href="index.html">
+            <div id="but_inicio"></div>
+        </a>
+        <div id="logo_lol"></div>
+        <div id="area_input">
+            <input type="text" class="input" placeholder="Email" id="email_input">
+            <input type="password" class="input" placeholder="Senha" id="senha_input">
+        </div>
+            <div id="but_login" onclick="entrar()">
+                <div id="img_login"></div>
+            </div>
+            <div id="cadastro">
+                <span>Não possui cadastro?</span>
+                <a href="cadastro.html" id="but_cadastrar">Cadastrar</a>
+            </div>
+    </div>
+</body>
+
+</html>
+<script>
+    function entrar() {
+        var emailVar = email_input.value;
+        var senhaVar = senha_input.value;
+
+        if (emailVar == "" || senhaVar == "") {
+            return false;
+        }
+        console.log("FORM LOGIN: ", emailVar);
+        console.log("FORM SENHA: ", senhaVar);
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+                
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NICK_USUARIO = json.nick;
+                    sessionStorage.ID_USUARIO = json.id;
+                    alert('Logado');
+                    setTimeout(() => {
+            window.location = "index.html";
+          }, "2000");
+                });
+                
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
+</script>
