@@ -140,14 +140,17 @@
       return false;
     }
     // Verificando se o código de ativação é de alguma empresa cadastrada
+    let verifTime = false;
     for (let i = 0; i < listaTimesCadastrados.length; i++) {
       if (listaTimesCadastrados[i].nome == timeVar) {
         idTimeVincular = listaTimesCadastrados[i].idTime
         console.log("Código de ativação válido.");
+        verifTime = true;
         break;
-      } else {
-        alert('Código Inválido')
       }
+    }
+    if(!verifTime){
+      alert('Código Inválido')
     }
 
     // Enviando o valor da nova input
@@ -193,7 +196,10 @@
             listaTimesCadastrados.push(time);
 
             console.log("listaTimesCadastrados")
-            console.log(listaTimesCadastrados[0].nome)
+            for(let i = 0; i < listaTimesCadastrados.length;i++){
+              console.log(listaTimesCadastrados[i].nome)
+            }
+            
           });
         });
       })

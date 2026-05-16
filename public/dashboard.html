@@ -86,14 +86,23 @@
 <script>
     invocador_nick.innerHTML = sessionStorage.NICK_USUARIO;
 
-    function obterDadosGrafico() {
-        fetch(`/medidas/ultimas/${idAquario}`, { cache: 'no-store' }).then(function (response) {
+    window.onload = obterDadosGrafico();
+
+    function obterDadosGrafico(){
+        obterDadosGraficoTitulosRegiao();
+        obterDadosGraficoTitulosTime();
+        obterDadosGraficoTimesFavoritos();
+        obterDadosGraficoPontuacoes();
+    }
+
+    function obterDadosGraficoTitulosRegiao() {
+        fetch(`/medidas/TitulosRegiao`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                     resposta.reverse();
 
-                    plotarGrafico(resposta, idAquario);
+                    plotarGraficoTitulosRegiao(resposta);
 
                 });
             } else {
@@ -105,21 +114,104 @@
             });
     }
 
-    const datareg = {
-        labels: ["CBLOL", "LCS", "LEC", "LCK", "LPL"],
+    function obterDadosGraficoTitulosTime() {
+        fetch(`/medidas/TitulosTime`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+
+                    plotarGraficoTitulosTime(resposta);
+
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+    function obterDadosGraficoTimesFavoritos() {
+        fetch(`/medidas/TimesFavoritos`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+
+                    plotarGraficoTimesFavoritos(resposta);
+
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+    function obterDadosGraficoPontuacoes() {
+        fetch(`/medidas/Pontuacoes`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+
+                    plotarGraficoPontuacoes(resposta);
+
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+    function plotarGraficoTitulosRegiao(resposta) {
+
+        console.log('iniciando plotagem do gráfico...');
+
+        let labelsreg = [];
+
+        const datareg = {
+        labels: labelsreg,
         datasets: [
             {
                 label: "Títulos Nacionais",
-                data: [20, 18, 25, 30, 28],
+                data: [],
                 backgroundColor: '#24737d',
             },
             {
                 label: "Títulos Internacionais",
-                data: [0, 3, 5, 15, 10],
+                data: [],
                 backgroundColor: '#ab8115',
             }
         ]
     };
+
+console.log('----------------------------------------------')
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+        console.log(resposta)
+
+// Inserindo valores recebidos em estrutura para plotar o gráfico
+        for (i = 0; i < resposta.length; i++) {
+            var registro = resposta[i];
+            labelsreg.push(registro.regiao);
+            datareg.datasets[0].data.push(registro.nacionais);
+            datareg.datasets[1].data.push(registro.internacionais);
+        }
+
+        console.log('----------------------------------------------')
+        console.log('O gráfico será plotado com os respectivos valores:')
+        console.log('Labels:')
+        console.log(labelsreg)
+        console.log('Dados:')
+        console.log(datareg.datasets)
+        console.log('----------------------------------------------')
 
     const configreg = {
         type: 'bar',
@@ -160,22 +252,49 @@
         document.getElementById('regiao'),
         configreg
     );
+    }
 
-    const datatime = {
-        labels: ["T1", "G2", "LOUD", "EDG"],
+    function plotarGraficoTitulosTime(resposta) {
+
+        console.log('iniciando plotagem do gráfico...');
+
+        let labelstime = [];
+
+        const datatime = {
+        labels: labelstime,
         datasets: [
             {
                 label: "Títulos Nacionais",
-                data: [10, 8, 5, 6],
+                data: [],
                 backgroundColor: '#24737d',
             },
             {
                 label: "Títulos Internacionais",
-                data: [5, 2, 0, 2],
+                data: [],
                 backgroundColor: '#ab8115',
             }
         ]
     };
+
+console.log('----------------------------------------------')
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+        console.log(resposta)
+
+// Inserindo valores recebidos em estrutura para plotar o gráfico
+        for (i = 0; i < resposta.length; i++) {
+            var registro = resposta[i];
+            labelstime.push(registro.nome);
+            datatime.datasets[0].data.push(registro.nacionais);
+            datatime.datasets[1].data.push(registro.internacionais);
+        }
+
+        console.log('----------------------------------------------')
+        console.log('O gráfico será plotado com os respectivos valores:')
+        console.log('Labels:')
+        console.log(labelstime)
+        console.log('Dados:')
+        console.log(datatime.datasets)
+        console.log('----------------------------------------------')
 
     const configtime = {
         type: 'bar',
@@ -216,28 +335,50 @@
         document.getElementById('time'),
         configtime
     );
+    }
 
-    const datatime_fav = {
-        labels: [
-            'Loud',
-            'T1',
-            'G2',
-            'INTZ'
-        ],
+    function plotarGraficoTimesFavoritos(resposta) {
+
+        console.log('iniciando plotagem do gráfico...');
+
+        let labelstime_fav = [];
+
+        const datatime_fav = {
+        labels: labelstime_fav,
         datasets: [{
             label: 'Quantidade de Fãs',
-            data: [20, 10, 5, 14],
+            data: [],
             backgroundColor: [
                 '#24737d',
                 '#ab8115',
                 '#95d0d6',
-                '#ffb800'
+                '#ffb800',
+                '#3d47ff'
             ],
             hoverOffset: 4,
             borderWidth: 0.5,
             borderColor: '#1c1916'
         }]
     };
+
+console.log('----------------------------------------------')
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+        console.log(resposta)
+
+// Inserindo valores recebidos em estrutura para plotar o gráfico
+        for (i = 0; i < resposta.length; i++) {
+            var registro = resposta[i];
+            labelstime_fav.push(registro.nome);
+            datatime_fav.datasets[0].data.push(registro.total);
+        }
+
+        console.log('----------------------------------------------')
+        console.log('O gráfico será plotado com os respectivos valores:')
+        console.log('Labels:')
+        console.log(labelstime_fav)
+        console.log('Dados:')
+        console.log(datatime_fav.datasets)
+        console.log('----------------------------------------------')
 
     const configtime_fav = {
         type: 'pie',
@@ -258,15 +399,41 @@
         document.getElementById('time_fav'),
         configtime_fav
     );
+    }
 
-    const dataquiz = {
-        labels: ["0-20", "21-40", "41-60", "61-80", "81-100"],
+function plotarGraficoPontuacoes(resposta) {
+
+        console.log('iniciando plotagem do gráfico...');
+
+        let labelsquiz = [];
+
+        const dataquiz = {
+        labels: labelsquiz,
         datasets: [{
-            label: "Quantidade de jogadores",
-            data: [5, 12, 25, 18, 10],
+            label: 'Quantidade de Invocadores',
+            data: [],
             backgroundColor: '#ab8115'
         }]
     };
+
+console.log('----------------------------------------------')
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+        console.log(resposta)
+
+// Inserindo valores recebidos em estrutura para plotar o gráfico
+        for (i = 0; i < resposta.length; i++) {
+            var registro = resposta[i];
+            labelsquiz.push(registro.faixa);
+            dataquiz.datasets[0].data.push(registro.total);
+        }
+
+        console.log('----------------------------------------------')
+        console.log('O gráfico será plotado com os respectivos valores:')
+        console.log('Labels:')
+        console.log(labelsquiz)
+        console.log('Dados:')
+        console.log(dataquiz.datasets)
+        console.log('----------------------------------------------')
 
     const configquiz = {
         type: 'bar',
@@ -305,4 +472,206 @@
         document.getElementById('quiz'),
         configquiz
     );
+    }
+
+    // const datareg = {
+    //     labels: ["CBLOL", "LCS", "LEC", "LCK", "LPL"],
+    //     datasets: [
+    //         {
+    //             label: "Títulos Nacionais",
+    //             data: [20, 18, 25, 30, 28],
+    //             backgroundColor: '#24737d',
+    //         },
+    //         {
+    //             label: "Títulos Internacionais",
+    //             data: [0, 3, 5, 15, 10],
+    //             backgroundColor: '#ab8115',
+    //         }
+    //     ]
+    // };
+
+    // const configreg = {
+    //     type: 'bar',
+    //     data: datareg,
+    //     options: {
+    //         indexAxis: 'y',
+    //         responsive: true,
+    //         plugins: {
+    //             legend: {
+    //                 labels: {
+    //                     color: "white"
+    //                 }
+    //             }
+    //         },
+    //         scales: {
+    //             x: {
+    //                 stacked: true,
+    //                 grid: {
+    //                     color: 'rgba(255,255,255,0.1)'
+    //                 },
+    //                 ticks: {
+    //                     color: 'white'
+    //                 }
+    //             },
+    //             y: {
+    //                 stacked: true,
+    //                 grid: {
+    //                     color: 'rgba(255,255,255,0.1)'
+    //                 },
+    //                 ticks: {
+    //                     color: 'white'
+    //                 }
+    //             }
+    //         }
+    //     }
+    // };
+    // const regiao = new Chart(
+    //     document.getElementById('regiao'),
+    //     configreg
+    // );
+
+    // const datatime = {
+    //     labels: ["T1", "G2", "LOUD", "EDG"],
+    //     datasets: [
+    //         {
+    //             label: "Títulos Nacionais",
+    //             data: [10, 8, 5, 6],
+    //             backgroundColor: '#24737d',
+    //         },
+    //         {
+    //             label: "Títulos Internacionais",
+    //             data: [5, 2, 0, 2],
+    //             backgroundColor: '#ab8115',
+    //         }
+    //     ]
+    // };
+
+    // const configtime = {
+    //     type: 'bar',
+    //     data: datatime,
+    //     options: {
+    //         indexAxis: 'y',
+    //         responsive: true,
+    //         plugins: {
+    //             legend: {
+    //                 labels: {
+    //                     color: "white"
+    //                 }
+    //             }
+    //         },
+    //         scales: {
+    //             x: {
+    //                 stacked: true,
+    //                 grid: {
+    //                     color: 'rgba(255,255,255,0.1)'
+    //                 },
+    //                 ticks: {
+    //                     color: 'white'
+    //                 }
+    //             },
+    //             y: {
+    //                 stacked: true,
+    //                 grid: {
+    //                     color: 'rgba(255,255,255,0.1)'
+    //                 },
+    //                 ticks: {
+    //                     color: 'white'
+    //                 }
+    //             }
+    //         }
+    //     }
+    // };
+    // const time = new Chart(
+    //     document.getElementById('time'),
+    //     configtime
+    // );
+
+    // const datatime_fav = {
+    //     labels: [
+    //         'Loud',
+    //         'T1',
+    //         'G2',
+    //         'INTZ'
+    //     ],
+    //     datasets: [{
+    //         label: 'Quantidade de Fãs',
+    //         data: [20, 10, 5, 14],
+    //         backgroundColor: [
+    //             '#24737d',
+    //             '#ab8115',
+    //             '#95d0d6',
+    //             '#ffb800'
+    //         ],
+    //         hoverOffset: 4,
+    //         borderWidth: 0.5,
+    //         borderColor: '#1c1916'
+    //     }]
+    // };
+
+    // const configtime_fav = {
+    //     type: 'pie',
+    //     data: datatime_fav,
+    //     options: {
+    //         responsive: true,
+    //         plugins: {
+    //             legend: {
+    //                 labels: {
+    //                     color: "white"
+    //                 }
+    //             }
+    //         },
+    //     }
+    // };
+
+    // const time_fav = new Chart(
+    //     document.getElementById('time_fav'),
+    //     configtime_fav
+    // );
+
+    // const dataquiz = {
+    //     labels: ["0-20", "21-40", "41-60", "61-80", "81-100"],
+    //     datasets: [{
+    //         label: "Quantidade de jogadores",
+    //         data: [5, 12, 25, 18, 10],
+    //         backgroundColor: '#ab8115'
+    //     }]
+    // };
+
+    // const configquiz = {
+    //     type: 'bar',
+    //     data: dataquiz,
+    //     options: {
+    //         responsive: true,
+    //         plugins: {
+    //             legend: {
+    //                 labels: {
+    //                     color: "white"
+    //                 }
+    //             }
+    //         },
+    //         scales: {
+    //             x: {
+    //                 grid: {
+    //                     color: 'rgba(255,255,255,0.1)'
+    //                 },
+    //                 ticks: {
+    //                     color: 'white'
+    //                 }
+    //             },
+    //             y: {
+    //                 grid: {
+    //                     color: 'rgba(255,255,255,0.1)'
+    //                 },
+    //                 ticks: {
+    //                     color: 'white'
+    //                 }
+    //             }
+    //         }
+    //     }
+    // };
+
+    // const quiz = new Chart(
+    //     document.getElementById('quiz'),
+    //     configquiz
+    // );
 </script>

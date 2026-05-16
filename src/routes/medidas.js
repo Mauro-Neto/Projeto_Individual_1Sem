@@ -15,4 +15,16 @@ router.get("/TitulosRegiao/", function (req, res) {
     medidaController.buscarTitulosRegiao(req, res);
 });
 
+router.get("/TitulosTime/", function (req, res) {
+    medidaController.buscarTitulosTime(req, res);
+});
+
+router.get("/TimesFavoritos/", function (req, res) {
+    medidaController.buscarTimesFavoritos(req, res);
+});
+
+router.get("/Pontuacoes/", function (req, res) {
+    medidaController.buscarPontuacoes(req, res);
+});
+
 module.exports = router;
