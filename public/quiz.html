@@ -32,14 +32,14 @@
             <div class="perfil">
                 <div id="icon_perfil"></div>
                 <div class="info_perfil">
-                    <span class="perfil_txt">Invocador</span>
+                    <span class="perfil_txt" id="invocador_nick">Invocador</span>
                     <span class="perfil_txt">Rank:</span>
                 </div>
             </div>
         </div>
     </div>
     <hr>
-    <div class="conteudo">
+    <div class="conteudo" id="idConteudo">
         <span id="titulo">Teste seu conhecimento</span>
         <div class="cont_pergunta">
             <span id="titulo_pergunta">1. Blah</span>
@@ -53,10 +53,15 @@
         </div>
         <div id="confirmar_but" onclick="responder()"></div>
     </div>
+    <div class="conteudo_respondido" id="idConteudoResp" style="display: none;">
+        <span id="titulo">Parabéns por concluir o Quiz!!</span>
+        <span id="txt_pontuacao"></span>
+    </div>
 </body>
 
 </html>
 <script>
+    invocador_nick.innerHTML = sessionStorage.NICK_USUARIO;
     let selecionado1 = false;
     let selecionado2 = false;
     let selecionado3 = false;
@@ -132,6 +137,36 @@
             op2.innerHTML = `Mata`;
             op3.innerHTML = `Pawn`;
             op4.innerHTML = `Imp`;
+        }else if(indice == 10){
+            idConteudo.style.display = 'none';
+            idConteudoResp.style.display = 'flex';
+            txt_pontuacao.innerHTML = `Você teve ${pontuacao} pontos`
+
+    var idVar = sessionStorage.ID_USUARIO;
+            // Enviando o valor da nova input
+    fetch("/usuarios/cadastrarPonto", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        idServer: idVar,
+        pontuacaoServer: pontuacao
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
         }
     }
 
@@ -146,56 +181,47 @@
             if (indice == 1) {
                 op3.style.outline = '5px solid green'
                 if(selecionado3){
-                    pontuacao++;
-                    alert(pontuacao);
+                    pontuacao+=5;
                 }
             }else if(indice == 2){
                 op3.style.outline = '5px solid green'
                 if(selecionado3){
-                    pontuacao++;
-                    alert(pontuacao);
+                    pontuacao+=5;
                 }
             }else if(indice == 3){
                 op2.style.outline = '5px solid green'
                 if(selecionado2){
-                    pontuacao++;
-                    alert(pontuacao);
+                    pontuacao+=5;
                 }
             }else if(indice == 4){
                 op2.style.outline = '5px solid green'
                 if(selecionado2){
-                    pontuacao++;
-                    alert(pontuacao);
+                    pontuacao+=5;
                 }
             }else if(indice == 5){
                 op4.style.outline = '5px solid green'
                 if(selecionado4){
-                    pontuacao++;
-                    alert(pontuacao);
+                    pontuacao+=15;
                 }
             }else if(indice == 6){
                 op1.style.outline = '5px solid green'
                 if(selecionado1){
-                    pontuacao++;
-                    alert(pontuacao);
+                    pontuacao+=15;
                 }
             }else if(indice == 7){
                 op1.style.outline = '5px solid green'
                 if(selecionado1){
-                    pontuacao++;
-                    alert(pontuacao);
+                    pontuacao+=15;
                 }
             }else if(indice == 8){
                 op3.style.outline = '5px solid green'
                 if(selecionado3){
-                    pontuacao++;
-                    alert(pontuacao);
+                    pontuacao+=15;
                 }
             }else if(indice == 9){
                 op2.style.outline = '5px solid green'
                 if(selecionado2){
-                    pontuacao++;
-                    alert(pontuacao);
+                    pontuacao+=20;
                 }
             }
             selecionado1 = false;

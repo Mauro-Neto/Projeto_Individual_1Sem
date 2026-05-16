@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/navbar.css">
-    <link rel="stylesheet" href="../css/selecionado.css">
-    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/selecionado.css">
+    <link rel="stylesheet" href="css/dashboard.css">
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -33,7 +33,7 @@
             <div class="perfil">
                 <div id="icon_perfil"></div>
                 <div class="info_perfil">
-                    <span class="perfil_txt">Invocador</span>
+                    <span class="perfil_txt" id="invocador_nick">Invocador</span>
                     <span class="perfil_txt">Rank:</span>
                 </div>
             </div>
@@ -84,6 +84,27 @@
 
 </html>
 <script>
+    invocador_nick.innerHTML = sessionStorage.NICK_USUARIO;
+
+    function obterDadosGrafico() {
+        fetch(`/medidas/ultimas/${idAquario}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+
+                    plotarGrafico(resposta, idAquario);
+
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
     const datareg = {
         labels: ["CBLOL", "LCS", "LEC", "LCK", "LPL"],
         datasets: [

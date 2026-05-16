@@ -1,5 +1,17 @@
 var database = require("../database/config");
 
+function buscarTitulosRegiao() {
+
+    var instrucaoSql = `SELECT regiao,
+SUM(titulos_nacionais) as nacionais,
+SUM(titulos_internacionais) as internacionais
+FROM time_lol
+GROUP BY regiao;`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 function buscarUltimasMedidas(idAquario, limite_linhas) {
 
     var instrucaoSql = `SELECT 
@@ -31,5 +43,6 @@ function buscarMedidasEmTempoReal(idAquario) {
 
 module.exports = {
     buscarUltimasMedidas,
-    buscarMedidasEmTempoReal
+    buscarMedidasEmTempoReal,
+    buscarTitulosRegiao
 }

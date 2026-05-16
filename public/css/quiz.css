@@ -60,3 +60,15 @@ body{
 #confirmar_but:hover{
     transform: scale(1.05);
 }
+.conteudo_respondido{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 80vh;
+    justify-content: center;
+}
+#txt_pontuacao{
+    font-weight: 700;   
+ font-size: xx-large;
+ color: #24737d;
+}

@@ -32,7 +32,7 @@
             <div class="perfil">
                 <div id="icon_perfil"></div>
                 <div class="info_perfil">
-                    <span class="perfil_txt">Invocador</span>
+                    <span class="perfil_txt" id="invocador_nick">Invocador</span>
                     <span class="perfil_txt">Rank:</span>
                 </div>
             </div>
@@ -106,6 +106,7 @@
 
 </html>
 <script>
+  invocador_nick.innerHTML = sessionStorage.NICK_USUARIO;
   let listaTimesCadastrados = [];
 
     function cadastrarTime() {

@@ -3,10 +3,10 @@ function validarSessao() {
     var email = sessionStorage.EMAIL_USUARIO;
     var nick = sessionStorage.NICK_USUARIO;
 
-    var b_usuario = document.getElementById("b_usuario");
+    var invocador_nick = document.getElementById("invocador_nick");
 
     if (email != null && nick != null) {
-        b_usuario.innerHTML = nick;
+        invocador_nick.innerHTML = nick;
     } else {
         window.location = "../login.html";
     }
