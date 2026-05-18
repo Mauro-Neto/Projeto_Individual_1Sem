@@ -97,7 +97,7 @@
                     <span class="titulo_ipt">Senha</span>
                     <input type="password" class="input" id="senha_input">
                 </div>
-                <div class="but_cadastrar" onclick="cadastrarI()"></div>
+                <div class="but_cadastrar" id="but_cadastrar" onclick="cadastrarI()"></div>
             </div>
         </div>
 
@@ -121,7 +121,7 @@
 
      function cadastrarI() {
     // aguardar();
-
+    but_cadastrar.disabled = true;
     //Recupere o valor da nova input pelo nome do id
     // Agora vá para o método fetch logo abaixo
     var nickVar = nick_input.value;
@@ -150,9 +150,9 @@
       }
     }
     if(!verifTime){
-      alert('Código Inválido')
-    }
-
+      alert('Time Inválido')
+      but_cadastrar.disabled = false;
+    }else{
     // Enviando o valor da nova input
     fetch("/usuarios/cadastrar", {
       method: "POST",
@@ -170,11 +170,11 @@
     })
       .then(function (resposta) {
         console.log("resposta: ", resposta);
-
         if (resposta.ok) {
+          alert('Cadastrado com Sucesso')
           setTimeout(() => {
             window.location = "login.html";
-          }, "2000");
+          }, "500");
         } else {
           throw "Houve um erro ao tentar realizar o cadastro!";
         }
@@ -182,7 +182,7 @@
       .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
       });
-
+    }
     return false;
   }
   // Listando empresas cadastradas 
@@ -208,9 +208,7 @@
       });
   }
   function cadastrarT() {
-    // aguardar();
-
-    //Recupere o valor da nova input pelo nome do id
+ but_cadastrar.disabled = true;
     // Agora vá para o método fetch logo abaixo
     var nomeVar = nome_input.value;
     var regiaoVar = regiao_input.value;
@@ -226,17 +224,7 @@
     ) {
       return false;
     }
-    // // Verificando se o código de ativação é de alguma empresa cadastrada
-    // for (let i = 0; i < listaEmpresasCadastradas.length; i++) {
-    //   if (listaEmpresasCadastradas[i].codigo_ativacao == codigoVar) {
-    //     idEmpresaVincular = listaEmpresasCadastradas[i].id
-    //     console.log("Código de ativação válido.");
-    //     break;
-    //   } else {
-    //     alert('Código Inválido')
-    //   }
-    // }
-
+    
     // Enviando o valor da nova input
     fetch("/time/cadastrar", {
       method: "POST",
@@ -256,9 +244,10 @@
         console.log("resposta: ", resposta);
 
         if (resposta.ok) {
+          alert('Cadastrado com Sucesso');
           setTimeout(() => {
             window.location = "cadastro.html";
-          }, "2000");
+          }, "500");
         } else {
           throw "Houve um erro ao tentar realizar o cadastro!";
         }

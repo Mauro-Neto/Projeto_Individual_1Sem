@@ -64,15 +64,15 @@
                     sessionStorage.EMAIL_USUARIO = json.email;
                     sessionStorage.NICK_USUARIO = json.nick;
                     sessionStorage.ID_USUARIO = json.id;
-                    alert('Logado');
+                    alert('Login realizado com Sucesso');
                     setTimeout(() => {
             window.location = "index.html";
-          }, "2000");
+          }, "500");
                 });
                 
             } else {
 
-                console.log("Houve um erro ao tentar realizar o login!");
+                alert("Email e/ou senha incorretos");
 
                 resposta.text().then(texto => {
                     console.error(texto);
