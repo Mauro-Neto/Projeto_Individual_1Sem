@@ -31,6 +31,7 @@ GROUP BY nome
 ORDER BY nacionais+internacionais DESC
 LIMIT 5;
 
+CREATE VIEW vw_times_favoritos AS
 SELECT nome, COUNT(*) as total
 FROM invocador JOIN time_lol ON timeFavorito = idTime
 GROUP BY nome
@@ -49,3 +50,6 @@ FROM invocador
 WHERE pontuacao IS NOT NULL
 GROUP BY faixa
 ORDER BY faixa;
+
+DELETE FROM invocador WHERE idInvocador = 9 OR idInvocador = 10 OR idInvocador = 11;
+ALTER TABLE invocador MODIFY COLUMN email VARCHAR(100) NOT NULL UNIQUE;

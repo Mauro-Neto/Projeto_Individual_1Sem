@@ -97,11 +97,37 @@ function buscarPontuacoes(req, res) {
     });
 }
 
+function buscarTotalInvocador(req, res) {
+  medidaModel.buscarTotalInvocador().then((resultado) => {
+    res.status(200).json(resultado);
+  });
+}
+
+function buscarTotalTime(req, res) {
+  medidaModel.buscarTotalTime().then((resultado) => {
+    res.status(200).json(resultado);
+  });
+}
+
+function buscarMediaQuiz(req, res) {
+  medidaModel.buscarMediaQuiz().then((resultado) => {
+    res.status(200).json(resultado);
+  });
+}
+function buscarTimeFavorito(req, res) {
+  medidaModel.buscarTimeFavorito().then((resultado) => {
+    res.status(200).json(resultado);
+  });
+}
 module.exports = {
     buscarUltimasMedidas,
     buscarMedidasEmTempoReal,
     buscarTitulosRegiao,
     buscarTitulosTime,
     buscarTimesFavoritos,
-    buscarPontuacoes
+    buscarPontuacoes,
+    buscarTotalInvocador,
+    buscarTotalTime,
+    buscarMediaQuiz,
+    buscarTimeFavorito
 }

@@ -27,4 +27,20 @@ router.get("/Pontuacoes/", function (req, res) {
     medidaController.buscarPontuacoes(req, res);
 });
 
+router.get("/TotalInvocador/", function (req, res) {
+    medidaController.buscarTotalInvocador(req, res);
+});
+
+router.get("/TotalTime/", function (req, res) {
+    medidaController.buscarTotalTime(req, res);
+});
+
+router.get("/MediaQuiz/", function (req, res) {
+    medidaController.buscarMediaQuiz(req, res);
+});
+
+router.get("/TimeFavorito/", function (req, res) {
+    medidaController.buscarTimeFavorito(req, res);
+});
+
 module.exports = router;

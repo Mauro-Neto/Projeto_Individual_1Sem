@@ -75,6 +75,7 @@
     <div class="tabelas">
         <div class="tabela invocadores">
             <span class="titulo">Top 10 Invocadores</span>
+            <span id="invocadores"></span>
         </div>
         <div class="tabela times">
             <span class="titulo">Times</span>
@@ -86,8 +87,64 @@
 <script>
     invocador_nick.innerHTML = sessionStorage.NICK_USUARIO;
 
-    window.onload = obterDadosGrafico();
+    window.onload = obterDadosGrafico(),buscarTotalInvocador(),buscarTotalTime(),buscarMediaQuiz(),buscarTimeFavorito();
 
+function buscarTotalInvocador() {
+    fetch("/medidas/TotalInvocador", {
+      method: "GET",
+    })
+      .then(function (resposta) {
+        resposta.json().then(function (total){
+            total_invocador.innerHTML = `Total de Invocadores<br>${total[0].TotalInvocador}`;
+        })
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  }
+
+  function buscarTotalTime() {
+    fetch("/medidas/TotalTime", {
+      method: "GET",
+    })
+      .then(function (resposta) {
+        resposta.json().then(function (total){
+            total_times.innerHTML = `Total de Times<br>${total[0].TotalTime}`;
+        })
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  }
+
+   function buscarMediaQuiz() {
+    fetch("/medidas/MediaQuiz", {
+      method: "GET",
+    })
+      .then(function (resposta) {
+        resposta.json().then(function (media){
+            media_quiz.innerHTML = `Média Quiz<br>${media[0].MediaQuiz}`;
+        })
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  }
+
+  function buscarTimeFavorito() {
+    fetch("/medidas/TimeFavorito", {
+      method: "GET",
+    })
+      .then(function (resposta) {
+        resposta.json().then(function (time){
+            time_favorito.innerHTML = `Time Favorito<br>${time[0].nome}`;
+        })
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  }
+  
     function obterDadosGrafico(){
         obterDadosGraficoTitulosRegiao();
         obterDadosGraficoTitulosTime();
@@ -474,204 +531,5 @@ console.log('----------------------------------------------')
     );
     }
 
-    // const datareg = {
-    //     labels: ["CBLOL", "LCS", "LEC", "LCK", "LPL"],
-    //     datasets: [
-    //         {
-    //             label: "Títulos Nacionais",
-    //             data: [20, 18, 25, 30, 28],
-    //             backgroundColor: '#24737d',
-    //         },
-    //         {
-    //             label: "Títulos Internacionais",
-    //             data: [0, 3, 5, 15, 10],
-    //             backgroundColor: '#ab8115',
-    //         }
-    //     ]
-    // };
 
-    // const configreg = {
-    //     type: 'bar',
-    //     data: datareg,
-    //     options: {
-    //         indexAxis: 'y',
-    //         responsive: true,
-    //         plugins: {
-    //             legend: {
-    //                 labels: {
-    //                     color: "white"
-    //                 }
-    //             }
-    //         },
-    //         scales: {
-    //             x: {
-    //                 stacked: true,
-    //                 grid: {
-    //                     color: 'rgba(255,255,255,0.1)'
-    //                 },
-    //                 ticks: {
-    //                     color: 'white'
-    //                 }
-    //             },
-    //             y: {
-    //                 stacked: true,
-    //                 grid: {
-    //                     color: 'rgba(255,255,255,0.1)'
-    //                 },
-    //                 ticks: {
-    //                     color: 'white'
-    //                 }
-    //             }
-    //         }
-    //     }
-    // };
-    // const regiao = new Chart(
-    //     document.getElementById('regiao'),
-    //     configreg
-    // );
-
-    // const datatime = {
-    //     labels: ["T1", "G2", "LOUD", "EDG"],
-    //     datasets: [
-    //         {
-    //             label: "Títulos Nacionais",
-    //             data: [10, 8, 5, 6],
-    //             backgroundColor: '#24737d',
-    //         },
-    //         {
-    //             label: "Títulos Internacionais",
-    //             data: [5, 2, 0, 2],
-    //             backgroundColor: '#ab8115',
-    //         }
-    //     ]
-    // };
-
-    // const configtime = {
-    //     type: 'bar',
-    //     data: datatime,
-    //     options: {
-    //         indexAxis: 'y',
-    //         responsive: true,
-    //         plugins: {
-    //             legend: {
-    //                 labels: {
-    //                     color: "white"
-    //                 }
-    //             }
-    //         },
-    //         scales: {
-    //             x: {
-    //                 stacked: true,
-    //                 grid: {
-    //                     color: 'rgba(255,255,255,0.1)'
-    //                 },
-    //                 ticks: {
-    //                     color: 'white'
-    //                 }
-    //             },
-    //             y: {
-    //                 stacked: true,
-    //                 grid: {
-    //                     color: 'rgba(255,255,255,0.1)'
-    //                 },
-    //                 ticks: {
-    //                     color: 'white'
-    //                 }
-    //             }
-    //         }
-    //     }
-    // };
-    // const time = new Chart(
-    //     document.getElementById('time'),
-    //     configtime
-    // );
-
-    // const datatime_fav = {
-    //     labels: [
-    //         'Loud',
-    //         'T1',
-    //         'G2',
-    //         'INTZ'
-    //     ],
-    //     datasets: [{
-    //         label: 'Quantidade de Fãs',
-    //         data: [20, 10, 5, 14],
-    //         backgroundColor: [
-    //             '#24737d',
-    //             '#ab8115',
-    //             '#95d0d6',
-    //             '#ffb800'
-    //         ],
-    //         hoverOffset: 4,
-    //         borderWidth: 0.5,
-    //         borderColor: '#1c1916'
-    //     }]
-    // };
-
-    // const configtime_fav = {
-    //     type: 'pie',
-    //     data: datatime_fav,
-    //     options: {
-    //         responsive: true,
-    //         plugins: {
-    //             legend: {
-    //                 labels: {
-    //                     color: "white"
-    //                 }
-    //             }
-    //         },
-    //     }
-    // };
-
-    // const time_fav = new Chart(
-    //     document.getElementById('time_fav'),
-    //     configtime_fav
-    // );
-
-    // const dataquiz = {
-    //     labels: ["0-20", "21-40", "41-60", "61-80", "81-100"],
-    //     datasets: [{
-    //         label: "Quantidade de jogadores",
-    //         data: [5, 12, 25, 18, 10],
-    //         backgroundColor: '#ab8115'
-    //     }]
-    // };
-
-    // const configquiz = {
-    //     type: 'bar',
-    //     data: dataquiz,
-    //     options: {
-    //         responsive: true,
-    //         plugins: {
-    //             legend: {
-    //                 labels: {
-    //                     color: "white"
-    //                 }
-    //             }
-    //         },
-    //         scales: {
-    //             x: {
-    //                 grid: {
-    //                     color: 'rgba(255,255,255,0.1)'
-    //                 },
-    //                 ticks: {
-    //                     color: 'white'
-    //                 }
-    //             },
-    //             y: {
-    //                 grid: {
-    //                     color: 'rgba(255,255,255,0.1)'
-    //                 },
-    //                 ticks: {
-    //                     color: 'white'
-    //                 }
-    //             }
-    //         }
-    //     }
-    // };
-
-    // const quiz = new Chart(
-    //     document.getElementById('quiz'),
-    //     configquiz
-    // );
 </script>

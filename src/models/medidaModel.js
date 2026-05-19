@@ -28,11 +28,8 @@ LIMIT 5;`;
 
 function buscarTimesFavoritos() {
 
-    var instrucaoSql = `SELECT nome,
-    COUNT(*) as total
-FROM invocador JOIN time_lol ON timeFavorito = idTime
-GROUP BY nome
-ORDER BY total DESC
+    var instrucaoSql = `SELECT nome,total
+    FROM vw_times_favoritos
 LIMIT 5;`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
@@ -87,11 +84,40 @@ function buscarMedidasEmTempoReal(idAquario) {
     return database.executar(instrucaoSql);
 }
 
+function buscarTotalInvocador() {
+  var instrucaoSql = `SELECT COUNT(*) as TotalInvocador FROM invocador`;
+
+  return database.executar(instrucaoSql);
+}
+
+function buscarTotalTime() {
+  var instrucaoSql = `SELECT COUNT(*) as TotalTime FROM time_lol`;
+
+  return database.executar(instrucaoSql);
+}
+
+function buscarMediaQuiz() {
+  var instrucaoSql = `SELECT TRUNCATE(AVG(pontuacao),0) as MediaQuiz FROM invocador WHERE pontuacao IS NOT NULL`;
+
+  return database.executar(instrucaoSql);
+}
+function buscarTimeFavorito() {
+  var instrucaoSql = `SELECT nome
+    FROM vw_times_favoritos
+LIMIT 1;`;
+
+  return database.executar(instrucaoSql);
+}
+
 module.exports = {
     buscarUltimasMedidas,
     buscarMedidasEmTempoReal,
     buscarTitulosRegiao,
     buscarTitulosTime,
     buscarTimesFavoritos,
-    buscarPontuacoes
+    buscarPontuacoes,
+    buscarTotalInvocador,
+    buscarTotalTime,
+    buscarMediaQuiz,
+    buscarTimeFavorito
 }
