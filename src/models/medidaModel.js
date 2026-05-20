@@ -109,6 +109,12 @@ LIMIT 1;`;
   return database.executar(instrucaoSql);
 }
 
+function listarTimes() {
+  var instrucaoSql = `SELECT * FROM time_lol;`;
+
+  return database.executar(instrucaoSql);
+}
+
 module.exports = {
     buscarUltimasMedidas,
     buscarMedidasEmTempoReal,
@@ -119,5 +125,6 @@ module.exports = {
     buscarTotalInvocador,
     buscarTotalTime,
     buscarMediaQuiz,
-    buscarTimeFavorito
+    buscarTimeFavorito,
+    listarTimes
 }

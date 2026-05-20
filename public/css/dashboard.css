@@ -48,6 +48,7 @@ body{
     color: white;
     font-weight: 700;
     font-size: xx-large;
+    text-shadow: #1c1916 4px 4px;
 }
 .tabelas{
     width: 100%;
@@ -58,9 +59,15 @@ body{
 }
 .tabela{
     display: flex;
-    justify-content: center;
-    height: 18vh;
-    width: 80vw;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    width: 60vw;
     background-color: #24737d;
     border-radius: 15px;
+}
+#lista_times{
+    color: white;
+    font-weight: 500;
+    font-size: x-large;
 }

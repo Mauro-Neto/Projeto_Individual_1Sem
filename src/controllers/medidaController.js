@@ -119,6 +119,11 @@ function buscarTimeFavorito(req, res) {
     res.status(200).json(resultado);
   });
 }
+function listarTimes(req, res) {
+  medidaModel.listarTimes().then((resultado) => {
+    res.status(200).json(resultado);
+  });
+}
 module.exports = {
     buscarUltimasMedidas,
     buscarMedidasEmTempoReal,
@@ -129,5 +134,6 @@ module.exports = {
     buscarTotalInvocador,
     buscarTotalTime,
     buscarMediaQuiz,
-    buscarTimeFavorito
+    buscarTimeFavorito,
+    listarTimes
 }

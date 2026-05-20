@@ -78,7 +78,8 @@
             <span id="invocadores"></span>
         </div>
         <div class="tabela times">
-            <span class="titulo">Times</span>
+            <span class="titulo">Times</span><br>
+            <span id="lista_times"></span>
         </div>
     </div>
 </body>
@@ -87,7 +88,7 @@
 <script>
     invocador_nick.innerHTML = sessionStorage.NICK_USUARIO;
 
-    window.onload = obterDadosGrafico(),buscarTotalInvocador(),buscarTotalTime(),buscarMediaQuiz(),buscarTimeFavorito();
+    window.onload = obterDadosGrafico(),buscarTotalInvocador(),buscarTotalTime(),buscarMediaQuiz(),buscarTimeFavorito(),listarTimes();
 
 function buscarTotalInvocador() {
     fetch("/medidas/TotalInvocador", {
@@ -145,6 +146,23 @@ function buscarTotalInvocador() {
       });
   }
   
+function listarTimes() {
+    fetch("/medidas/ListarTimes", {
+      method: "GET",
+    })
+      .then(function (resposta) {
+        resposta.json().then(function (time){
+            for(let i = 0; i < time.length; i++){
+                lista_times.innerHTML += `Time: ${time[i].nome} | Liga: ${time[i].regiao} | 
+                Títulos Nacionais: ${time[i].titulosNacionais} | Títulos Internacionais: ${time[i].titulosInternacionais}<br><br>`;
+            }
+        })
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  }
+
     function obterDadosGrafico(){
         obterDadosGraficoTitulosRegiao();
         obterDadosGraficoTitulosTime();

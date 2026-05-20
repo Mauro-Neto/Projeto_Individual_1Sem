@@ -43,4 +43,8 @@ router.get("/TimeFavorito/", function (req, res) {
     medidaController.buscarTimeFavorito(req, res);
 });
 
+router.get("/ListarTimes/", function (req, res) {
+    medidaController.listarTimes(req, res);
+});
+
 module.exports = router;
