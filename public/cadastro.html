@@ -87,7 +87,9 @@
                 </div>
                 <div class="area_ipt">
                     <span class="titulo_ipt">Time Favorito</span>
-                    <input type="text" id="time_input" class="input">
+                    <select id="time_input" class="input">
+                    </select>
+                    <!-- <input type="text" id="time_input" class="input"> -->
                 </div>
                 <div class="area_ipt">
                     <span class="titulo_ipt">Email</span>
@@ -191,17 +193,13 @@
       method: "GET",
     })
       .then(function (resposta) {
-        resposta.json().then((times) => {
-          times.forEach((time) => {
-            listaTimesCadastrados.push(time);
-
-            console.log("listaTimesCadastrados")
-            for(let i = 0; i < listaTimesCadastrados.length;i++){
-              console.log(listaTimesCadastrados[i].nome)
+        resposta.json().then(function (time){
+            for(let i = 0; i < time.length; i++){
+                listaTimesCadastrados.push(time[i]);
+                time_input.innerHTML += `<option>${time[i].nome}</option>`
+              console.log(time[i].nome)
             }
-            
-          });
-        });
+        })
       })
       .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
