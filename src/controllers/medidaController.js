@@ -124,6 +124,11 @@ function listarTimes(req, res) {
     res.status(200).json(resultado);
   });
 }
+function listarInvocadores(req, res) {
+  medidaModel.listarInvocadores().then((resultado) => {
+    res.status(200).json(resultado);
+  });
+}
 module.exports = {
     buscarUltimasMedidas,
     buscarMedidasEmTempoReal,
@@ -135,5 +140,6 @@ module.exports = {
     buscarTotalTime,
     buscarMediaQuiz,
     buscarTimeFavorito,
-    listarTimes
+    listarTimes,
+    listarInvocadores
 }

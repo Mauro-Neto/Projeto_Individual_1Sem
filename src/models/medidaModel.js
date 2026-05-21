@@ -115,6 +115,15 @@ function listarTimes() {
   return database.executar(instrucaoSql);
 }
 
+function listarInvocadores() {
+  var instrucaoSql = `SELECT nick,pontuacao FROM invocador
+  WHERE pontuacao IS NOT NULL
+  ORDER BY pontuacao DESC
+  LIMIT 10;`;
+
+  return database.executar(instrucaoSql);
+}
+
 module.exports = {
     buscarUltimasMedidas,
     buscarMedidasEmTempoReal,
@@ -126,5 +135,6 @@ module.exports = {
     buscarTotalTime,
     buscarMediaQuiz,
     buscarTimeFavorito,
-    listarTimes
+    listarTimes,
+    listarInvocadores
 }

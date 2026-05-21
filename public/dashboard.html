@@ -34,7 +34,6 @@
                 <div id="icon_perfil"></div>
                 <div class="info_perfil">
                     <span class="perfil_txt" id="invocador_nick">Invocador</span>
-                    <span class="perfil_txt">Rank:</span>
                 </div>
             </div>
         </div>
@@ -75,11 +74,11 @@
     <div class="tabelas">
         <div class="tabela invocadores">
             <span class="titulo">Top 10 Invocadores</span>
-            <span id="invocadores"></span>
+            <span id="lista_invocadores" class="lista"></span>
         </div>
         <div class="tabela times">
             <span class="titulo">Times</span><br>
-            <span id="lista_times"></span>
+            <span id="lista_times" class="lista"></span>
         </div>
     </div>
 </body>
@@ -88,7 +87,7 @@
 <script>
     invocador_nick.innerHTML = sessionStorage.NICK_USUARIO;
 
-    window.onload = obterDadosGrafico(),buscarTotalInvocador(),buscarTotalTime(),buscarMediaQuiz(),buscarTimeFavorito(),listarTimes();
+    window.onload = obterDadosGrafico(),buscarTotalInvocador(),buscarTotalTime(),buscarMediaQuiz(),buscarTimeFavorito(),listarTimes(),listarInvocadores();
 
 function buscarTotalInvocador() {
     fetch("/medidas/TotalInvocador", {
@@ -155,6 +154,22 @@ function listarTimes() {
             for(let i = 0; i < time.length; i++){
                 lista_times.innerHTML += `Time: ${time[i].nome} | Liga: ${time[i].regiao} | 
                 Títulos Nacionais: ${time[i].titulosNacionais} | Títulos Internacionais: ${time[i].titulosInternacionais}<br><br>`;
+            }
+        })
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  }
+
+  function listarInvocadores() {
+    fetch("/medidas/ListarInvocadores", {
+      method: "GET",
+    })
+      .then(function (resposta) {
+        resposta.json().then(function (invocador){
+            for(let i = 0; i < invocador.length; i++){
+                lista_invocadores.innerHTML += `Nick: ${invocador[i].nick} | Pontuação: ${invocador[i].pontuacao} | Ranking: ${i+1}º<br><br>`;
             }
         })
       })

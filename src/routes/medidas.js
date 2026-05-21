@@ -47,4 +47,8 @@ router.get("/ListarTimes/", function (req, res) {
     medidaController.listarTimes(req, res);
 });
 
+router.get("/ListarInvocadores/", function (req, res) {
+    medidaController.listarInvocadores(req, res);
+});
+
 module.exports = router;
