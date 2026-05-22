@@ -39,8 +39,6 @@ body{
 }
 
 #icon_perfil {
-    background-image: url(../assets/img/icon_vazio.jpg);
-    background-size: cover;
     height: 50px;
     width: 50px;
     border-radius: 50%;
@@ -68,8 +66,9 @@ body{
 }
 
 .perfil_txt {
-    color: white;
-    font-weight: 400;
+    color: #ab8115;
+    font-weight: 500;
+    font-size: x-large;
 }
 
 hr {

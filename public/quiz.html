@@ -30,7 +30,7 @@
                 <a href="dashboard.html" class="op_nav_txt">Dashboard</a>
             </div>
             <div class="perfil">
-                <div id="icon_perfil"></div>
+                <img id="icon_perfil" src="assets/img/icon_vazio.jpg">
                 <div class="info_perfil">
                     <span class="perfil_txt" id="invocador_nick">Invocador</span>
                 </div>
@@ -60,7 +60,10 @@
 
 </html>
 <script>
-    invocador_nick.innerHTML = sessionStorage.NICK_USUARIO;
+    if(sessionStorage.NICK_USUARIO != undefined){
+        invocador_nick.innerHTML = sessionStorage.NICK_USUARIO;
+        icon_perfil.src = "assets/img/suco-pera.webp"
+    }
     let selecionado1 = false;
     let selecionado2 = false;
     let selecionado3 = false;
