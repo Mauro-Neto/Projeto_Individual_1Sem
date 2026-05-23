@@ -71,3 +71,14 @@ body{
     font-weight: 500;
     font-size: x-large;
 }
+#cont_deslogado{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 93vh;
+}
+#msg_login{
+    font-weight: 700;
+    font-size: xx-large;
+    color: white;
+}

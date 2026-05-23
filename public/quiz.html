@@ -37,7 +37,7 @@
             </div>
         </div>
     </div>
-    <hr>
+    <div id="cont_logado">
     <div class="conteudo" id="idConteudo">
         <span id="titulo">Teste seu conhecimento</span>
         <div class="cont_pergunta">
@@ -56,13 +56,20 @@
         <span id="titulo">Parabéns por concluir o Quiz!!</span>
         <span id="txt_pontuacao"></span>
     </div>
+    </div>
+    <div id="cont_deslogado">
+        <span id="msg_login">Efetue o Login para usufruir desse conteúdo</span>
+    </div>
 </body>
 
 </html>
 <script>
     if(sessionStorage.NICK_USUARIO != undefined){
+        cont_deslogado.style.display = 'none';
         invocador_nick.innerHTML = sessionStorage.NICK_USUARIO;
         icon_perfil.src = "assets/img/suco-pera.webp"
+    }else{
+        cont_logado.style.display = 'none';
     }
     let selecionado1 = false;
     let selecionado2 = false;
