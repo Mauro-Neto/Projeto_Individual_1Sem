@@ -88,15 +88,16 @@
                     <span class="titulo_ipt">Time Favorito</span>
                     <select id="time_input" class="input">
                     </select>
-                    <!-- <input type="text" id="time_input" class="input"> -->
                 </div>
                 <div class="area_ipt">
                     <span class="titulo_ipt">Email</span>
-                    <input type="text" class="input" id="email_input">
+                    <input type="text" class="input" id="email_input" oninput="validarEmail()">
+                    <span id="txt_email"></span>
                 </div>
                 <div class="area_ipt">
                     <span class="titulo_ipt">Senha</span>
-                    <input type="password" class="input" id="senha_input">
+                    <input type="password" class="input" id="senha_input" oninput="validarSenha()">
+                    <span id="txt_senha"></span>
                 </div>
                 <div class="but_cadastrar" id="but_cadastrar" onclick="cadastrarI()"></div>
             </div>
@@ -112,6 +113,82 @@
         icon_perfil.src = "assets/img/suco-pera.webp"
     }
   let listaTimesCadastrados = [];
+
+  let verifemail = false;
+
+    function validarEmail(){
+      let email = email_input.value;
+
+        if(email.includes('@') && email.includes('.')){
+           txt_email.innerHTML = ``;
+           verifemail = true;
+        }else if(email.includes('.')){
+             txt_email.innerHTML = `Deve conter @`;
+             verifemail = false;
+        }else if(email.includes('@')){
+            txt_email.innerHTML = `Deve conter .`;
+             verifemail = false;
+        }else{
+            txt_email.innerHTML = `Deve conter @<br>
+                                    Deve conter .`;
+             verifemail = false;
+        }
+    }
+
+    let caracteres = ['!','@','#','$','%','&','*','(',')','_','-','+','=','{','}','[',']','/','|','.',',',';',':','<','>','?']
+    let verifsenha = false;
+
+    function validarSenha(){
+        let senha = senha_input.value;
+        let tamanho = senha.length;
+        let msg_tam = '';
+        let msg_carac = '';
+        let msg_mai = '';
+        let msg_min = '';
+        let tam = false;
+        let carac = false;
+        let mai = false;
+        let min = false;
+
+        if(tamanho < 8){
+            msg_tam = `A senha deve conter ao menos 8 caracteres<br>`
+            tam = false;
+        }else{
+            tam = true;
+        }
+        if(validarCaractere()){
+            msg_carac = `A senha deve conter ao menos 1 caractere especial<br>`
+            carac = false;
+        }else{
+            carac = true;
+        }
+        if(senha.toUpperCase() == senha){
+            msg_min = `A senha deve conter ao menos 1 letra minúscula<br>`
+            min = false;
+        }else{
+            min = true;
+        }
+        if(senha.toLowerCase() == senha){
+            msg_mai = `A senha deve conter ao menos 1 letra maiúscula<br>`
+            mai = false;
+        }else{
+            mai = true;
+        }
+
+        if(tam && carac && min && mai){
+          verifsenha = true;
+        }
+        txt_senha.innerHTML = msg_tam+msg_carac+msg_mai+msg_min;
+    }
+    function validarCaractere(){
+        let senha = senha_input.value;
+        for(let cont = 0;cont < caracteres.length;cont++){
+            if(senha.includes(caracteres[cont])){
+                return false;
+            }
+        }
+        return true;
+    }
 
     function cadastrarTime() {
         opcoes.style.display = 'none';
@@ -139,8 +216,11 @@
       nickVar == "" ||
       emailVar == "" ||
       senhaVar == ""  ||
-      timeVar == ""
+      timeVar == "" ||
+      verifemail == false ||
+      verifsenha == false
     ) {
+      alert('Preencha todos os campos corretamente')
       return false;
     }
     // Verificando se o código de ativação é de alguma empresa cadastrada
@@ -222,6 +302,7 @@
       titulosNacionaisVar == "" ||
       titulosInternacionaisVar == ""
     ) {
+      alert('Preencha todos os campos')
       return false;
     }
     
